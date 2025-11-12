@@ -1,0 +1,19 @@
+---
+const { title } = Astro.props;
+---
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{title || 'Mi Proyecto Astro'}</title>
+  </head>
+  <body>
+    <header>
+      <h1>Mi Proyecto Astro</h1>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+  </body>
+</html>
