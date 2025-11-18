@@ -3,7 +3,7 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://arnaunin.github.io/',
-  base: '/lista_tareas_astro',
+  base: '/lista_pokemones',
   outDir: 'dist',
   integrations: [react()],
 });
