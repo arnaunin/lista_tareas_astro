@@ -13,7 +13,8 @@ const PokemonList = () => {
     addPokemon,
     toggleCapturado,
     deletePokemon,
-    addManyPokemons
+    addManyPokemons,
+    deleteAllPokemon
   } = usePokedex()
 
   const [texto, setTexto] = useState('')
@@ -41,6 +42,7 @@ const PokemonList = () => {
         <input type="text" value={texto} onChange={(e) => setTexto(e.target.value)}/>
         <button type='submit'>Agregar pokemon a la pokedex</button>
       </form>
+      <button className='deleteAllButton' onClick={() => deleteAllPokemon()}>Vaciar Pokedex</button>
       <ul className='listaSinPuntos'>
         {pokedex.map((pokemon) => {
           return (

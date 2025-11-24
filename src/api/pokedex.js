@@ -80,3 +80,16 @@ export const createManyPokemons = async (nombres) => {
         throw error
     }
 }
+
+export const removeAllPokemon = async () => {
+    try {
+        const res = await fetch(`${BASE_POKEDEX_URL}/clear`, {
+            method: "DELETE",
+        })
+        if (!res.ok) throw new Error("Error removing all pokemon")
+        return await res.json()
+    } catch (error) {
+        console.log("API ERROR removeAllPokemon:", error)
+        throw error
+    }
+}

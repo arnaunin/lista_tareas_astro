@@ -5,7 +5,8 @@ import {
   createPokemon,
   updatePokemon,
   removePokemon,
-  createManyPokemons
+  createManyPokemons,
+  removeAllPokemon
  } from '../api/pokedex'
 
 const usePokedex = () => {
@@ -50,6 +51,11 @@ const usePokedex = () => {
     await refreshPokedex()
   }
 
+  const deleteAllPokemon = async () => {
+    await removeAllPokemon()
+    await refreshPokedex()
+  }
+
   return {
     pokedex,
     isLoading,
@@ -57,7 +63,8 @@ const usePokedex = () => {
     addPokemon,
     toggleCapturado,
     deletePokemon,
-    addManyPokemons
+    addManyPokemons,
+    deleteAllPokemon
   }
 }
 

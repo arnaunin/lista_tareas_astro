@@ -40,3 +40,6 @@ input {
     accent-color:#FFCB08;
 }
 
+.deleteAllButton {
+    margin-top: 10px;
+}
