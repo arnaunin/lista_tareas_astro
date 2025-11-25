@@ -43,3 +43,15 @@ input {
 .deleteAllButton {
     margin-top: 10px;
 }
+
+.listaPokemon {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+@media (min-width: 768px) {
+    .listaPokemon {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

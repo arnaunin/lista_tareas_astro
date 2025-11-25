@@ -66,6 +66,7 @@ export const removePokemon = async (id) => {
     }
 }
 
+/*
 export const createManyPokemons = async (nombres) => {
     try {
         const res = await fetch(`${BASE_POKEMON_URL}/bulk`, {
@@ -93,3 +94,4 @@ export const removeAllPokemon = async () => {
         throw error
     }
 }
+*/
