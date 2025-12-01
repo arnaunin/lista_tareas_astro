@@ -5,7 +5,7 @@ import {
   createPokemon,
   updatePokemon,
   removePokemon,
- } from '../api/pokedex'
+ } from '../api/pokedex.js'
 
 const usePokedex = () => {
 
