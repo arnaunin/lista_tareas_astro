@@ -29,8 +29,8 @@ const usePokedex = () => {
     refreshPokedex()
   }, [])
 
-  const addPokemon = async (nombre) => {
-    await createPokemon(nombre)
+  const addPokemon = async (nombre, imageUrl) => {
+    await createPokemon(nombre, imageUrl)
     await refreshPokedex()
   }
 

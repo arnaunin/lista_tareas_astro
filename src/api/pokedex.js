@@ -22,14 +22,14 @@ export const getPokemonById = async (id) => {
     }
 }
 
-export const createPokemon = async (nombre) => {
+export const createPokemon = async (nombre, imageUrl) => {
     try {
         const res = await fetch(BASE_POKEDEX_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ nombre: nombre })
+            body: JSON.stringify({ nombre: nombre, imagen: imageUrl })
         })
         if (!res.ok) throw new Error("Failed to create")
         return await res.json()

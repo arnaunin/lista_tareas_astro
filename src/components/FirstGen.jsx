@@ -1,7 +1,8 @@
-import useImagesFirstGen from "../hooks/useImagesFirstGen";
+import usePokedex from '../hooks/usePokedex'
+
 
 const FirstGen = () => {
-  const { images, isLoading, error } = useImagesFirstGen()
+  const { pokedex, isLoading, error } = usePokedex()
 
   if (isLoading) return <p className="text-center mt-8 text-gray-500">Cargando...</p>;
   if (error) return <p className="text-center mt-8 text-red-500">Error al cargar imágenes</p>;
@@ -13,7 +14,7 @@ const FirstGen = () => {
       </h3>
 
       <ul className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-        {images.map((pokemon) => (
+        {pokedex.filter((poke) => poke.base === true).map((pokemon) => (
           <li
             key={pokemon.id}
             className="bg-white cursor-pointer shadow-md rounded-2xl p-4 flex flex-col items-center transition-transform transform hover:scale-105 hover:shadow-xl"

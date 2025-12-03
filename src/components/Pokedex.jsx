@@ -3,6 +3,7 @@ import usePokedex from '../hooks/usePokedex'
 import Buscador from './Buscador'
 
 const PokemonList = () => {
+
   const { pokedex, isLoading, addPokemon, toggleCapturado } = usePokedex()
 
   // Estado para controlar los pokemones introducidos manualmente
@@ -11,19 +12,74 @@ const PokemonList = () => {
   // Estado para el buscador de pokemones
   const [text, setText] = useState('')
 
+  const [modalMsg, setModalMsg] = useState("")
+  const [modalType, setModalType] = useState("")
+
+  const showModal = (msg, type) => {
+    setModalMsg(msg);
+    setModalType(type);
+
+    setTimeout(() => {
+      setModalMsg("");
+      setModalType("");
+    }, 2500);
+  }
+
   const pokedexFiltrada = pokedex.filter((pokemon) =>
     pokemon.nombre.toLowerCase().includes(text.toLowerCase().trim())
   )
 
-  const handleAddPokemon = (e) => {
+  const URL = 'https://pokeapi.co/api/v2/pokemon'
+
+  const handleAddPokemon = async (e) => {
     e.preventDefault()
     if (!texto.trim()) return
-    if (!isLoading) addPokemon(texto.toLowerCase())
-    setTexto('')
+
+    const pokemon = texto.toLowerCase().trim()
+
+    try {
+      const res = await fetch(`${URL}/${pokemon}`)
+
+      if (!res.ok) {
+        showModal("Ese Pokémon no existe.", "error")
+        return
+      }
+
+      const data = await res.json()
+      const imageUrl = await data.sprites.other['official-artwork'].front_default
+
+      if (!imageUrl) {
+        showModal("Este Pokémon no tiene imagen oficial.", "error")
+        return
+      }
+
+      if (!isLoading) await addPokemon(texto.toLowerCase(), imageUrl)
+      showModal("¡Pokémon añadido con éxito!", "success")
+      setTexto('')
+
+    } catch (error) {
+      showModal("Error al conectar con el servidor.", "error")
+    }
   }
 
   return (
     <div className='flex flex-col items-center gap-8'>
+      
+      {modalMsg && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50"
+        >
+          <div
+            className={`
+              px-6 py-4 rounded-xl text-white text-lg font-semibold shadow-lg animate-fade
+              ${modalType === "success" ? "bg-green-600" : "bg-red-600"}
+            `}
+          >
+            {modalMsg}
+          </div>
+        </div>
+      )}
+
       <h3 className='text-3xl font-bold text-center mt-4 mb-2 text-gray-700'>
         Lista de Pokemones
       </h3>
